@@ -23,10 +23,13 @@ Thumbs.db
 [Dd]ebug*/
 *.lib
 *.sbr
-obj/
+obj/**
+bin/**
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
 .vs/
 #Nuget packages folder
 packages/
+*.dll
+*.pdb
