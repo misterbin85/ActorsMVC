@@ -6,18 +6,39 @@
 <div class="jumbotron">
     <h1>Actors</h1>
 </div>
+
 <div id="container">
     <div id="ActorDiv" class="row">
     </div>
 </div>
+
 <script>
     $(function () {
-        GetAllActors();
+        GetAll();
     });
+
+    function GetAll() {
+        $.get("/Home/All", function (data) {
+            $("#ActorDiv").html(data);
+        });
+    }
+
+    function GetAllActresses() {
+        $.get("/Home/Actresses", function (data) {
+            $("#ActorDiv").html(data);
+        });
+    }
 
     function GetAllActors() {
         $.get("/Home/Actors", function (data) {
             $("#ActorDiv").html(data);
         });
+    }
+
+    function ShowActorInfo(id) {
+        $.get("/Home/ActorInfo/", { id: id },
+            function (data) {
+                $("#ActorDiv").html(data);
+            });
     }
 </script>

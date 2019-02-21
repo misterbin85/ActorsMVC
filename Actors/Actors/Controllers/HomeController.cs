@@ -1,4 +1,6 @@
-﻿using Actors.Repositories;
+﻿using Actors.Helpers;
+using Actors.Repositories;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Actors.Controllers
@@ -11,15 +13,29 @@ namespace Actors.Controllers
 			return PartialView();
 		}
 
-		public ActionResult Actors()
+		public ActionResult All()
 		{
 			var actors = ActorsRepository.GetAllActors();
-			return PartialView(actors);
+			return PartialView("Actors", actors);
 		}
 
 		public ActionResult Actresses()
 		{
-			return PartialView();
+			var actresses = ActorsRepository.GetAllActors().Where(m => m.Gender == Enums.Gender.female.ToString());
+			return PartialView("Actors", actresses);
+		}
+
+		public ActionResult Actors()
+		{
+			var actors = ActorsRepository.GetAllActors().Where(m => m.Gender == Enums.Gender.male.ToString());
+			return PartialView("Actors", actors);
+		}
+
+		public ActionResult ActorInfo(int id)
+		{
+			var fullInfo = ActorsRepository.ActorInfo(id);
+
+			return PartialView(fullInfo);
 		}
 
 		public ActionResult About()

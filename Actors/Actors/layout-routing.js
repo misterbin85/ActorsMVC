@@ -11,9 +11,32 @@ $(function () {
 });
 
 var routingApp = $.sammy("#MainContent", function () {
-    this.get("#/Home/Actors", function (context) {
+    this.get("#/Home/All", function (context) {
         titleContent.html("Main Page");
+        $.get("/Home/All", function (data) {
+            context.$element().html(data);
+        });
+    });
+
+    this.get("#/Home/Actors", function (context) {
+        titleContent.html("Actors");
         $.get("/Home/Actors", function (data) {
+            context.$element().html(data);
+        });
+    });
+
+    this.get("#/Home/ActorInfo", function (context) {
+        titleContent.html("ActorInfo");
+        console.log(context.params.id);
+        $.get("/Home/ActorInfo", { id: context.params.id },
+            function (data) {
+                context.$element().html(data);
+            });
+    });
+
+    this.get("#/Home/Actresses", function (context) {
+        titleContent.html("Actresses");
+        $.get("/Home/Actresses", function (data) {
             context.$element().html(data);
         });
     });

@@ -1,4 +1,4 @@
-﻿@model  IEnumerable<Actors.Models.ActorViewModel>
+﻿@model  IEnumerable<Actors.Models.MainPageViewModel>
 @{
     Layout = null;
 }
@@ -9,11 +9,14 @@
         <li class="col-md-2 photo_back">
             <br />
             @{
-                var path = actorModel.Photos.FirstOrDefault(p => p.IsMain)?.PhotoPath.Replace(" ", "_") + ".jpg";
+                var path = actorModel.PhotoPath.Replace(" ", "_") + ".jpg";
             }
-            <img class="img-thumbnail" src="~/Images/@path" alt="..." />
+
+            <a href="~/Images/@path" data-fancybox data-caption="Caption for single image">
+                <img class="img-thumbnail" src="~/Images/@path" alt="..." />
+            </a>
             <br />
-            <label>@actorModel.Actor.FullName</label>
+            <label onclick="javascript:ShowActorInfo('@actorModel.ActorId')">@actorModel.ActorName</label>
         </li>
 
     }
